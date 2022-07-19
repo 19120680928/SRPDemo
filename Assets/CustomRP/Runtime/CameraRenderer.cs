@@ -16,6 +16,10 @@ public partial class CameraRenderer
     };
 
     CullingResults cullingResults;    //存储相机剔除后的结果
+
+    BRDFseting brdfseting;
+
+
     static ShaderTagId unlitShaderTagId = new ShaderTagId("SRPDefaultUnlit");
     static ShaderTagId litShaderTagId = new ShaderTagId("CustomLit");
     Lighting lighting = new Lighting();    //光照实例
@@ -27,6 +31,9 @@ public partial class CameraRenderer
     {
         this.context = context;
         this.camera = camera;
+
+                    // 设置 IBL 贴图
+        // Shader.SetGlobalTexture("_brdfLut", brdfseting.brdfLut);
         //设置buffer缓冲区的名字
         PrepareBuffer();
         // 在Game视图绘制的几何体也绘制到Scene视图中

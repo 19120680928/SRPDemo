@@ -95,19 +95,19 @@ float4 SampleBakedShadows (float2 lightMapUV, Surface surfaceWS) {
 		}
 	#endif
 }
-//采样环境立方体纹理
+	//IBL的镜面反射部分
 float3 SampleEnvironment (Surface surfaceWS, BRDF brdf) {
 	//通过reflect方法由负的视角方向和法线方向得到反射方向得到3D纹理坐标UVW
 	float3 uvw = reflect(-surfaceWS.viewDirection, surfaceWS.normal);
 	//通过感知粗糙度来计算出正确的mipmap级别
 	float mip = PerceptualRoughnessToMipmapLevel(brdf.perceptualRoughness);
 	float4 environment = SAMPLE_TEXTURECUBE_LOD(unity_SpecCube0, samplerunity_SpecCube0, uvw, mip);
-	return DecodeHDREnvironment(environment, unity_SpecCube0_HDR);
+	return DecodeHDREnvironment(environment, unity_SpecCube0_HDR);//转回伽马空间
 }
 //得到全局照明数据
 GI GetGI(float2 lightMapUV, Surface surfaceWS, BRDF brdf) {
 	GI gi;
-	//将采样结果作为漫反射光照
+	//天空间接光编辑器lighting设置就有，这里就不加了
 	gi.diffuse = SampleLightMap(lightMapUV) + SampleLightProbe(surfaceWS);
 	//采样CubeMap获得环境的镜面反射
 	gi.specular = SampleEnvironment(surfaceWS, brdf);

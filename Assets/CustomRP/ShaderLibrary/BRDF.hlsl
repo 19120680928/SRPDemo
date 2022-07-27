@@ -34,7 +34,7 @@ BRDF GetBRDF (Surface surface, bool applyAlphaToDiffuse = false) {
 	//乘以表面颜色得到BRDF的漫反射
 	float Kd = GetKd(surface.metallic);
 	brdf.diffuse = surface.color * Kd;
-	//透明度预乘
+	//透明度预乘(Alpha blend)
 	if (applyAlphaToDiffuse) {
 		brdf.diffuse *= surface.alpha;
 	}
@@ -79,16 +79,18 @@ float3 DirectBRDF (Surface surface, BRDF brdf, Light light)
 	brdf.specular = F_Schlick * D_GGX * G_GGX / (4 * NdotV * NdotL);
 
 	//漫反射
-	brdf.diffuse = GetKd(F_Schlick, surface.metallic) * surface.color;
+	float3 Ds = GetKd(F_Schlick, surface.metallic) * surface.color;
 	//return 1 ;
-	return brdf.specular + brdf.diffuse;
+	return brdf.specular + Ds;
 }
-//获取基于BRDF的间接照明 曲线拟合，贴图都省了
+//获取基于BRDF的间接反射数值拟合代替BRDF积分LUT贴图
 float3 IndirectBRDF (Surface surface, BRDF brdf, float3 diffuse, float3 specular)
 {
+	//IndirectonSepular
 	float fresnelStrength =surface.fresnelStrength * Pow4(1.0 - saturate(dot(surface.normal, surface.viewDirection)));
     float3 reflection = specular * lerp(brdf.specular, brdf.fresnel, fresnelStrength);
 	reflection /= brdf.roughness * brdf.roughness + 1.0;
+	//Gi.difffuse * KD = IndierctDifffuse 
     return diffuse * brdf.diffuse + reflection;
 }
 

@@ -13,15 +13,15 @@ CBUFFER_START(_CustomLight)
 CBUFFER_END
 
 //灯光的属性
-struct Light {
+struct Light 
+{
     float3 color;
     float3 direction;
     float attenuation;//衰减
 };
 //获取方向光源的数量
-int GetDirectionalLightCount() {
-	return _DirectionalLightCount;
-}
+int GetDirectionalLightCount() {return _DirectionalLightCount;}
+
 //获取方向光的阴影数据
 DirectionalShadowData GetDirectionalShadowData(int lightIndex, ShadowData shadowData) {
 	DirectionalShadowData data;

@@ -28,8 +28,14 @@ float3 GetKd(float3 F,float metallic)
 	return (1 - F) * (1 - metallic);
 }
 
+float4 GetRoughness(float4 PBRMask)
+{
+	return pow((1 - PBRMask.a), 2);//约定a通道是smoothness，转roughness
+}
+
 //得到表面的BRDF数据
-BRDF GetBRDF (Surface surface, bool applyAlphaToDiffuse = false) {
+BRDF GetBRDF (Surface surface, bool applyAlphaToDiffuse = false) 
+{
 	BRDF brdf;
 	//乘以表面颜色得到BRDF的漫反射
 	float Kd = GetKd(surface.metallic);

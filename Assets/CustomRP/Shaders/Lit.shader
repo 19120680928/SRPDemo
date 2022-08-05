@@ -6,6 +6,9 @@
 	   [HideInInspector] _Color("Color for Lightmap", Color) = (0.5, 0.5, 0.5, 1.0)
 	   _BaseMap("Texture", 2D) = "white" {}
 	   _BaseColor("Color", Color) = (0.5, 0.5, 0.5, 1.0)
+
+	   [NoScaleOffset] _RampMap ("Ramp图", 2D) = "white" { }
+	   _RampMapYRange ("Ramp图Y采样范围", Range(-0.5,0.5)) = 0.5
 	   //透明度测试的阈值
 	   _Cutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
 	   [Toggle(_CLIPPING)] _Clipping("Alpha Clipping", Float) = 0
@@ -18,6 +21,7 @@
        //金属度和光滑度
 	   _Metallic("Metallic", Range(0, 1)) = 0
 	   _Smoothness("Smoothness", Range(0, 1)) = 0.5
+	   [NoScaleOffset]_MaskMap ("Mask贴图", 2D) = "white" { }
 	   //菲涅尔强度
 	   _Fresnel ("Fresnel", Range(0, 1)) = 1
 	   //自发光

@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CustomRP_Lit
-  m_Shader: {fileID: 4800000, guid: bcafd799921274a4d99e4afac4564bc6, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: fa5b56141da4b4c4191f4893a0122217, type: 3}
+  m_ShaderKeywords: _RECEIVE_SHADOWS _SHADOWS_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -18,6 +18,49 @@ Material:
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats: []
-    m_Colors: []
+    m_TexEnvs:
+    - _AOmap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 5b11466ad31a850408117fa22af9bff5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 5b11466ad31a850408117fa22af9bff5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskMap:
+        m_Texture: {fileID: 2800000, guid: fbc7a3d4c94575d488bd54bfae2e3983, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParamTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RampMap:
+        m_Texture: {fileID: 2800000, guid: c6fe41f3bbd5852439c8d5898b51c57a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Clipping: 0
+    - _Cutoff: 0.5
+    - _DstBlend: 0
+    - _Fresnel: 1
+    - _Metallic: 0
+    - _PremulAlpha: 0
+    - _RampMapYRange: -0.159
+    - _ReceiveShadows: 1
+    - _Shadows: 0
+    - _Smoothness: 0
+    - _SrcBlend: 1
+    - _ZWrite: 1
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}

@@ -102,12 +102,13 @@ float3 SampleEnvironment (Surface surfaceWS, BRDF brdf) {
 	//通过感知粗糙度来计算出正确的mipmap级别
 	float mip = PerceptualRoughnessToMipmapLevel(brdf.perceptualRoughness);
 	float4 environment = SAMPLE_TEXTURECUBE_LOD(unity_SpecCube0, samplerunity_SpecCube0, uvw, mip);
-	return DecodeHDREnvironment(environment, unity_SpecCube0_HDR);//转回伽马空间
+	//用DecodeHDREnvironment将颜色从HDR编码下解码。
+	return DecodeHDREnvironment(environment, unity_SpecCube0_HDR);
 }
 //得到全局照明数据
 GI GetGI(float2 lightMapUV, Surface surfaceWS, BRDF brdf) {
 	GI gi;
-	//天空间接光编辑器lighting设置就有，这里就不加了
+	//天空间接光漫反射编辑器lighting设置就有，这里就不加了
 	gi.diffuse = SampleLightMap(lightMapUV) + SampleLightProbe(surfaceWS);
 	//采样CubeMap获得环境的镜面反射
 	gi.specular = SampleEnvironment(surfaceWS, brdf);

@@ -21,6 +21,8 @@
        //金属度和光滑度
 	   _Metallic("Metallic", Range(0, 1)) = 0
 	   _Smoothness("Smoothness", Range(0, 1)) = 0.5
+	   //改用PBR流程mask贴图
+	   [Toggle(_PREMULTIPLY_Mask)] _PremulMask("改用PBR流程mask贴图", Float) = 0
 	   [NoScaleOffset]_MaskMap ("Mask贴图", 2D) = "white" { }
 	   //菲涅尔强度
 	   _Fresnel ("Fresnel", Range(0, 1)) = 1
@@ -28,7 +30,7 @@
 	   [NoScaleOffset] _EmissionMap("Emission", 2D) = "white" {}
 	   [HDR] _EmissionColor("Emission", Color) = (0.0, 0.0, 0.0, 0.0)
 	   //AO
-	   [NoScaleOffset] _AOmap ("Ambient Occlussion",2D) = "white" {}
+	//    [NoScaleOffset] _AOmap ("Ambient Occlussion",2D) = "white" {}
 	   //设置混合模式
 	  [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend("Src Blend", Float) = 1
 	  [Enum(UnityEngine.Rendering.BlendMode)] _DstBlend("Dst Blend", Float) = 0

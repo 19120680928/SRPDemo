@@ -70,15 +70,22 @@ float4 LitPassFragment(Varyings input) : SV_TARGET {
 	surface.fresnelStrength = GetFresnel(input.baseUV);
 	//计算抖动值
 	surface.dither = InterleavedGradientNoise(input.positionCS.xy, 0);
+#if defined(_PREMULTIPLY_Mask)
+	surface.metallic = GetPBRMaskMap(baseUV).r;
+	surface.smoothness = GetPBRMaskMap(baseUV).g;
+	surface.specular = GetPBRMaskMap(baseUV).a;
+#endif
 	//通过表面属性和BRDF计算最终光照结果
-#if defined(_PREMULTIPLY_ALPHA)
+#if defined(_PREMULTIPLY_ALPHA) 
 	BRDF brdf = GetBRDF(surface, true);
 #else
 	BRDF brdf = GetBRDF(surface);
 #endif
+
 	//获取全局照明
 	GI gi = GetGI(GI_FRAGMENT_DATA(input), surface, brdf);
-	float3 color = GetLighting(surface, brdf, gi) * GetAo(input.baseUV);
+	// float3 color = GetLighting(surface, brdf, gi) * GetAo(input.baseUV);
+	float3 color = GetLighting(surface, brdf, gi);
 	color += GetEmission(input.baseUV);
 	return float4(color, surface.alpha);
 }

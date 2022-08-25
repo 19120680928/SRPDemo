@@ -62,6 +62,6 @@ float3 GetAo(float2 baseUV)
 }
 float3 GetPBRMaskMap(float2 baseUV)
 {
-	return (SAMPLE_TEXTURE2D(_AOmap,sampler_BaseMap,baseUV)).rgb;
+	return (SAMPLE_TEXTURE2D(_MaskMap,sampler_MaskMap,baseUV)).rgb;
 }
 #endif
